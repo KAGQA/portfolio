@@ -741,22 +741,32 @@
     chatMessages.appendChild(loadingDiv);
 
     try {
-        const response = await fetch("/api/generate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+        "Authorization": "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",
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        model: "qwen/qwen2.5-coder:7b-instruct",
+        messages: [
+            {
+                role: "system",
+                content: "You are Alexander's QA assistant. Help with software testing, bug reports, test cases, and QA questions."
             },
-            body: JSON.stringify({
-                model: "qwen2.5-coder:7b",
-                prompt: message,
-                stream: false
-            })
-        });
+            {
+                role: "user",
+                content: message
+            }
+        ]
+    })
+});
 
-        const data = await response.json();
+const data = await response.json();
 
-        loadingDiv.remove();
-        addMessage(data.response);
+loadingDiv.remove();
+
+addMessage(data.choices[0].message.content);
 
     } catch (error) {
         loadingDiv.textContent = "Ошибка подключения к модели";
