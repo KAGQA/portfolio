@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA Manual | Визитка</title>
+
+   <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQDYVQF4QR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YQDYVQF4QR');
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent);
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .position {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--light);
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+    text-decoration: none;
+    color: inherit;
+}
+
+        .section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-card {
+            background: var(--light);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .chat-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+
+        .chat-box {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 400px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background: #e9ecef;
+            color: var(--dark);
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .mindmap-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .mindmap {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .template-card {
+            background: var(--light);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .template-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .template-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .template-card li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .template-card li:before {
+            content: "•";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .chat-box {
+                width: 300px;
+                height: 350px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+        /* Linux hover effect */
+.linux-card .linux-icon {
+    font-size: 2rem;
+    color: var(--dark);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.linux-card:hover .linux-icon {
+    transform: rotate(15deg) scale(1.25);
+    color: #f5a623; /* фирменный linux-оранжевый */
+}
+
+/* ===== MIRO DRAW STYLE ===== */
+
+.mindmap-live{
+  position:relative;
+  height:560px;
+  background:#f7fbff;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.mindmap-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.node{
+  position:absolute;
+  padding:12px 18px;
+  background:white;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  font-weight:600;
+  opacity:0;
+  transform:scale(.6);
+  transition:.4s cubic-bezier(.2,.8,.2,1);
+}
+
+.node.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+.center{
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.6);
+  background:linear-gradient(135deg,#4361ee,#4cc9f0);
+  color:white;
+}
+
+/* позиции */
+
+#n-func{ left:70%; top:35%; }
+#n-nonfunc{ left:15%; top:35%; }
+
+#n-pos{ left:82%; top:15%; }
+#n-neg{ left:82%; top:55%; }
+#n-smoke{ left:60%; top:10%; }
+#n-reg{ left:60%; top:70%; }
+
+#n-perf{ left:5%; top:15%; }
+#n-sec{ left:5%; top:55%; }
+#n-usab{ left:25%; top:70%; }
+
+  /* ... ваши текущие стили ... */
+
+  /* ===== Ссылки в шаблонах (чек-листы, баги, тест-кейсы) ===== */
+  .checklist-link,
+  .bug-link,
+  .testcase-link {
+      text-decoration: none;
+      color: inherit; /* наследуем цвет от родителя */
+      transition: color 0.3s ease;
+  }
+
+  .checklist-link:hover,
+  .bug-link:hover,
+  .testcase-link:hover {
+      color: var(--primary); /* цвет при наведении */
+      text-decoration: none; /* убираем подчеркивание даже при hover */
+  }
+
+/* ===== Ссылки в шаблонах (чек-листы, баги, тест-кейсы) ===== */
+.checklist-link,
+.bug-link,
+.testcase-link {
+    text-decoration: none;
+    color: inherit; /* наследуем цвет от родителя */
+    transition: color 0.3s ease;
+}
+
+.checklist-link:hover,
+.bug-link:hover,
+.testcase-link:hover {
+    color: var(--primary); /* цвет при наведении */
+    text-decoration: none; /* убираем подчеркивание даже при hover */
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="/photo.png" alt="Фото" class="profile-img">
+            <h1 class="name">Александр Кошевой</h1>
+            <p class="position">QA Manual | Тестировщик ПО</p>
+            <div class="contact-info">
+    <a href="mailto:koshevoy.alexander@gmail.com" class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <span>koshevoy.alexander@gmail.com</span>
+    </a>
+
+    <a href="tel:+79260713447" class="contact-item">
+        <i class="fas fa-phone"></i>
+        <span>+7 (926) 071-34-47</span>
+    </a>
+
+    <a href="https://t.me/netmarley" target="_blank" class="contact-item">
+        <i class="fab fa-telegram"></i>
+        <span>@netmarley</span>
+    </a>
+</div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">О себе</h2>
+            <p>QA Manual с 3+ годами опыта в тестировании API, Web и мобильных приложений:</p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-bug" style="font-size: 2rem; color: var(--danger);"></i>
+                    <p>Ручное тестирование</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code" style="font-size: 2rem; color: var(--primary);"></i>
+                    <p>Автотесты</p>
+                </div>
+                <a href="http://94.198.134.161:8081/" target="_blank" class="skill-card" style="text-decoration: none; color: inherit;">
+                <i class="fas fa-database" style="font-size: 2rem; color: var(--success);"></i>
+                <p>SQL и базы данных</p>
+                </a>
+                <div class="skill-card">
+                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color: var(--warning);"></i>
+                    <p>Тестирование мобильных приложений</p>
+                </div>
+                <div class="skill-card linux-card" onclick="connectServer()" style="cursor:pointer;">
+                <i class="fab fa-linux linux-icon"></i>
+                <p>Linux</p>
+            </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Шаблоны</h2>
+            <div class="templates-grid">
+                <div class="template-card">
+                    <h3><i class="fas fa-list-check"></i> Чек-листы</h3>
+                   <ul>
+    <li><a href="#" class="checklist-link" data-template="registration">Чек-лист для регистрации</a></li>
+    <li><a href="#" class="checklist-link" data-template="login">Чек-лист для авторизации</a></li>
+    <li><a href="#" class="checklist-link" data-template="feedback">Чек-лист для формы обратной связи</a></li>
+    <li><a href="#" class="checklist-link" data-template="api">Чек-лист для тестирования API</a></li>
+</ul>
+                </div>
+                <div class="template-card">
+                    <h3><i class="fas fa-bug"></i> Баг-репорты</h3>
+                    <ul>
+  <li><a href="#" class="bug-link" data-template="bug-basic">Шаблон баг-репорта</a></li>
+  <li><a href="#" class="bug-link" data-template="bug-attachments">Шаблон баг-репорта с приложениями, логами и скриншотами</a></li>
+  </ul>
+                </div>
+                <div class="template-card">
+                    <h3><i class="fas fa-file-alt"></i> Тест-кейсы</h3>
+                    <ul>
+  <li><a href="#" class="testcase-link" data-template="tc-basic">Шаблон тест-кейса</a></li>
+  <li><a href="#" class="testcase-link" data-template="tc-expected">Шаблон тест-кейса Test IT</a></li>
+  <li><a href="#" class="testcase-link" data-template="tc-preconditions">Шаблон тест-Zyphyr</a></li>
+  </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+    <h2 class="section-title">Mindmap</h2>
+
+   <div class="mindmap-live" id="mindmap" style="padding:0; overflow:hidden;">
+  <iframe
+    src="https://miro.com/app/live-embed/uXjVG699aHM=/?embedMode=view_only_without_ui&moveToViewport=-4706%2C-2686%2C9737%2C5355&embedId=935897479051"
+    style="width:100%; height:560px; border:none; border-radius:20px;"
+    allowfullscreen
+  ></iframe>
+</div>
+</section>
+
+        <section class="section">
+            <h2 class="section-title">Инструменты</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+  <img src="https://cdn.simpleicons.org/selenium/43B02A" 
+     alt="Selenium" 
+     style="width:40px;height:40px;">
+  <p>Selenium</p>
+</div>
+                <div class="skill-card">
+  <img src="https://cdn.simpleicons.org/postman/FF6C37" 
+     alt="Postman" 
+     style="width:40px;height:40px;">
+  <p>Postman</p>
+</div>
+                <div class="skill-card">
+                    <i class="fas fa-database" style="font-size: 2rem; color: var(--success);"></i>
+                    <p>MySQL</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-jira" style="font-size: 2rem; color: var(--secondary);"></i>
+                    <p>Jira</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code" style="font-size: 2rem; color: var(--danger);"></i>
+                    <p>Python</p>
+                </div>
+                <div class="skill-card">
+    <img src="https://cdn.simpleicons.org/charles/4285F4" alt="Charles" style="height:32px;">
+    <p>Charles</p>
+</div>
+
+<div class="skill-card">
+    <img src="https://cdn.simpleicons.org/apachekafka/231F20" alt="Kafka UI" style="height:32px;">
+    <p>Kafka UI</p>
+</div>
+
+            <div class="skill-card">
+                <img src="https://cdn.simpleicons.org/cypress/17202C" alt="Cypress" style="height:32px;">
+                <p>Cypress</p>
+            </div>
+
+            <div class="skill-card">
+                 <img src="https://cdn.simpleicons.org/kibana/005571" alt="Kibana" style="height:32px;">
+                 <p>Kibana</p>
+            </div>
+
+            <div class="skill-card">
+                <img src="https://cdn.simpleicons.org/miro/FFD02F" 
+                alt="Miro" 
+                style="height:32px;">
+                <p>Miro</p>
+            </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="chat-container">
+        <button class="chat-toggle" id="chatToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <span>Alexander_bot</span>
+                <button id="closeChat">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    Привет! Задай мне вопрос.
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Введите ваш вопрос...">
+                <button id="sendButton"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 QA Manual | Визитка</p>
+    </footer>
+
+<!-- Checklist Modal -->
+<div id="checklistModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
+    <div style="background:white; width:90%; max-width:700px; max-height:80vh; overflow:auto; border-radius:12px; padding:20px; position:relative;">
+        <button id="closeChecklist" style="position:absolute; right:15px; top:10px; border:none; background:none; font-size:22px; cursor:pointer;">&times;</button>
+       <h3 id="checklistTitle" style="margin-bottom:15px;"></h3>
+
+<div id="templateMeta" style="margin-bottom:15px; display:flex; gap:10px; flex-wrap:wrap;">
+
+  <!-- BUG META (оставляем для багов) -->
+  <div id="bugMetaFields" style="display:flex; gap:10px;">
+    <select id="prioritySelect" style="padding:6px;">
+      <option>Priority: Lowest</option>
+      <option>Priority: Low</option>
+      <option>Priority: Medium</option>
+      <option>Priority: High</option>
+      <option>Priority: Highest</option>
+    </select>
+
+    <select id="severitySelect" style="padding:6px;">
+      <option>Severity: Trivial</option>
+      <option>Severity: Minor</option>
+      <option>Severity: Major</option>
+      <option>Severity: Critical</option>
+      <option>Severity: Blocker</option>
+    </select>
+  </div>
+
+  <!-- TC BASIC -->
+  <select id="tcPriorityBasic" style="padding:6px; display:none;">
+    <option>Priority: Lowest</option>
+      <option>Priority: Low</option>
+      <option>Priority: Medium</option>
+      <option>Priority: High</option>
+      <option>Priority: Highest</option>
+  </select>
+
+  <!-- TESTIT -->
+  <select id="tcPriorityTestIT" style="padding:6px; display:none;">
+    <option>Приоритет: самый высокий</option>
+    <option>Приоритет: высокий</option>
+    <option>Приоритет: средний</option>
+    <option>Приоритет: низкий</option>
+    <option>Приоритет: самый низкий</option>
+  </select>
+
+  <select id="tcStatusTestIT" style="padding:6px; display:none;">
+    <option>Статус: готов</option>
+    <option>Статус: не готов</option>
+    <option>Статус: доработка</option>
+  </select>
+
+  <select id="tcPlanTestIT" style="padding:6px; display:none;">
+    <option>Тест план: в процессе</option>
+    <option>Тест план: приостановлен</option>
+    <option>Тест план: завершен</option>
+  </select>
+
+  <!-- ZEPHYR -->
+  <select id="tcPriorityZephyr" style="padding:6px; display:none;">
+    <option>Приоритет: Высокий</option>
+    <option>Приоритет: Нормальный</option>
+    <option>Приоритет: Низкий</option>
+  </select>
+
+  <select id="tcExecZephyr" style="padding:6px; display:none;">
+    <option>Выполнение: не выполнялся</option>
+    <option>Выполнение: в работе</option>
+    <option>Выполнение: пройден</option>
+    <option>Выполнение: провален</option>
+    <option>Выполнение: блокирован</option>
+  </select>
+
+  <button id="copyTemplateBtn" style="padding:6px 12px; cursor:pointer;">
+    📋 Copy
+  </button>
+
+</div>
+
+<div id="templateTableContainer" style="display:none;"></div>
+
+<div id="checklistContent" style="margin-bottom:15px;"></div>
+
+<textarea
+  id="templateTextarea"
+  style="width:100%; height:320px; padding:12px; font-family:monospace; resize:vertical;"
+></textarea>
+    </div>
+</div>
+
+    <script>
+        // Chat functionality
+        const chatToggle = document.getElementById('chatToggle');
+        const chatBox = document.getElementById('chatBox');
+        const closeChat = document.getElementById('closeChat');
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+
+        chatToggle.addEventListener('click', () => {
+            chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatBox.style.display = 'none';
+        });
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+    async function sendMessage() {
+    const message = userInput.value.trim();
+    if (!message) return;
+
+    addMessage(message, true);
+    userInput.value = '';
+
+    const loadingDiv = document.createElement('div');
+    loadingDiv.classList.add('message', 'bot-message');
+    loadingDiv.textContent = "Генерация ответа...";
+    chatMessages.appendChild(loadingDiv);
+
+    try {
+        const response = await fetch("/api/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "qwen2.5-coder:7b",
+                prompt: message,
+                stream: false
+            })
+        });
+
+        const data = await response.json();
+
+        loadingDiv.remove();
+        addMessage(data.response);
+
+    } catch (error) {
+        loadingDiv.textContent = "Ошибка подключения к модели";
+        console.error(error);
+    }
+}
+
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+function generateID(prefix = "QA") {
+  const rand = Math.floor(Math.random() * 100000);
+  return `${prefix}-${rand}`;
+}
+
+// ================= CHECKLISTS =================
+
+const checklistTemplates = {
+    registration: {
+        title: "Чек-лист: Регистрация",
+        items: [
+            "Открывается страница регистрации",
+            "Все обязательные поля помечены",
+            "Валидация email работает",
+            "Пароль соответствует требованиям",
+            "Сообщения об ошибках отображаются корректно",
+            "Успешная регистрация пользователя",
+            "Письмо подтверждения отправлено"
+        ]
+    },
+    login: {
+        title: "Чек-лист: Авторизация",
+        items: [
+            "Открывается страница логина",
+            "Вход с валидными данными успешен",
+            "Ошибка при неверном пароле",
+            "Ошибка при несуществующем пользователе",
+            "Работает кнопка 'Забыли пароль'",
+            "Сессия создаётся корректно",
+            "Logout работает"
+        ]
+    },
+    feedback: {
+        title: "Чек-лист: Форма обратной связи",
+        items: [
+            "Форма отображается корректно",
+            "Валидация обязательных полей",
+            "Проверка формата email",
+            "Сообщение успешно отправляется",
+            "Показывается сообщение об успехе",
+            "Форма очищается после отправки",
+            "Защита от спама работает"
+        ]
+    },
+    api: {
+        title: "Чек-лист: Тестирование API",
+        items: [
+            "Endpoint доступен",
+            "Корректный статус-код ответа",
+            "Структура JSON валидна",
+            "Проверка обязательных полей",
+            "Обработка ошибок работает",
+            "Проверка времени ответа",
+            "Авторизация работает"
+        ]
+    }
+};
+
+const bugTemplates = {
+  "bug-basic": {
+    title: "Баг-репорт: Стандартный",
+    idPrefix: "BUG",
+    showMeta: true,
+    content: `
+ID: {{ID}}
+Summary (Заголовок):
+
+Description (Описание):        
+
+Priority:
+Severity:
+
+Окружение:
+- OS:
+- Browser:
+- Version:
+- Build:
+
+Предусловие:
+
+Шаги воспроизведения:
+1.
+2.
+3.
+
+Текущий результат:
+
+Ожидаемый результат:
+
+Вложения:
+
+Комментарии:
+`
+  },
+
+  "bug-attachments": {
+    title: "Баг-репорт: С приложениями, скриншотами и логами",
+    idPrefix: "BUG",
+    showMeta: true,
+    content: `
+ID: {{ID}}
+
+Summary (Заголовок):
+
+Description (Описание):
+
+Шаги воспроизведения:
+1.
+2.
+3.
+
+Текущий результат (+скриншот или видео*):
+
+Ожидаемый результат (+скриншот*):
+
+Окружение:
+- Билд:
+- Операционная система:
+- Браузер:
+
+Тестовые устройства: 
+
+API/cURL:
+
+Аналитика:
+
+Документация:
+
+Логи:
+
+Priority:
+Severity:
+
+Наблюдатели:
+
+*-по возможности
+`
+  },
+};
+
+const testCaseTemplates = {
+  "tc-basic": {
+    title: "Тест-кейс: Стандартный",
+    idPrefix: "TC",
+    showMeta: false,
+    content: `
+ID: {{ID}}
+Название:
+
+Priority:
+
+Предусловия/тестовые данные:
+
+Действия:
+1.
+2.
+3.
+
+Ожидаемый результат:
+1.
+2.
+3.
+
+
+Статус: Not Run
+Автор:
+`
+  },
+
+  "tc-expected": {
+    title: "Тест-кейс: TestIT",
+    idPrefix: "TC",
+    showMeta: true,
+    content: `
+ID: {{ID}}
+Название:
+
+Теги:
+
+Секция (test suite):
+
+Приоритет:
+
+Статус:
+
+Продолжительность:
+
+Предусловия:
+
+
+|Шаг | Действия  |  Ожидаемый результат | Тестовые данные|
+        
+  1       
+  2       
+  3       
+
+
+Тест план (Test Run):
+
+`
+  },
+
+  "tc-preconditions": {
+    title: "Тест-кейс: Zephyr",
+    idPrefix: "TC",
+    showMeta: true,
+    content: `
+ID: {{ID}}
+Наименование:
+
+Задача тест кейса:
+
+Предварительные действия до начала работы с тест кейсом:
+
+Приоритет:
+
+Шаги:
+1.
+2.
+3.
+
+Выполнение:
+
+Вложения:
+
+Комментарии:
+`
+  },
+};
+
+
+const modal = document.getElementById('checklistModal');
+const modalTitle = document.getElementById('checklistTitle');
+const closeChecklist = document.getElementById('closeChecklist');
+const modalContent = document.getElementById('checklistContent');
+
+let currentTemplate = null;
+
+function renderChecklist(templateKey) {
+    const template = checklistTemplates[templateKey];
+    currentTemplate = templateKey;
+
+    modalTitle.textContent = template.title;
+// режим чек-листа
+document.getElementById("templateMeta").style.display = "none";
+document.getElementById("templateTextarea").style.display = "none";
+modalContent.style.display = "block";
+
+    modalContent.innerHTML = '';
+
+    template.items.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.style.marginBottom = '8px';
+
+        row.innerHTML = `
+            <label style="cursor:pointer;">
+                <input type="checkbox" style="margin-right:8px;">
+                ${item}
+            </label>
+        `;
+        modalContent.appendChild(row);
+    });
+
+    modal.style.display = 'flex';
+}
+
+function renderTemplateFrom(source, templateKey) {
+  const template = source[templateKey];
+  currentTemplate = templateKey;
+
+  modalTitle.textContent = template.title;
+
+  const textarea = document.getElementById("templateTextarea");
+  const bugMetaFields = document.getElementById("bugMetaFields");
+
+  const tcBasic = document.getElementById("tcPriorityBasic");
+  const tcTestITPriority = document.getElementById("tcPriorityTestIT");
+  const tcTestITStatus = document.getElementById("tcStatusTestIT");
+  const tcTestITPlan = document.getElementById("tcPlanTestIT");
+  const tcZephyrPriority = document.getElementById("tcPriorityZephyr");
+  const tcZephyrExec = document.getElementById("tcExecZephyr");
+
+  // скрываем всё
+  [
+    bugMetaFields,
+    tcBasic,
+    tcTestITPriority,
+    tcTestITStatus,
+    tcTestITPlan,
+    tcZephyrPriority,
+    tcZephyrExec
+  ].forEach(el => el && (el.style.display = "none"));
+
+  modalContent.style.display = "none";
+  textarea.style.display = "block";
+
+  // ===== логика по шаблонам =====
+
+  if (templateKey.startsWith("bug")) {
+    bugMetaFields.style.display = "flex";
+  }
+
+  if (templateKey === "tc-basic") {
+    tcBasic.style.display = "block";
+  }
+
+  if (templateKey === "tc-expected") {
+    tcTestITPriority.style.display = "block";
+    tcTestITStatus.style.display = "block";
+    tcTestITPlan.style.display = "block";
+  }
+
+  if (templateKey === "tc-preconditions") {
+    tcZephyrPriority.style.display = "block";
+    tcZephyrExec.style.display = "block";
+  }
+
+  let content = template.content || "";
+  content = content.replace("{{ID}}", generateID(template.idPrefix));
+
+  textarea.value = content;
+  modal.style.display = "flex";
+}
+
+// ===== checklist links =====
+document.querySelectorAll('.checklist-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    renderChecklist(link.dataset.template);
+  });
+});
+
+// ===== bug links =====
+
+document.querySelectorAll('.bug-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    renderTemplateFrom(bugTemplates, link.dataset.template);
+  });
+});
+
+document.querySelectorAll('.testcase-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    renderTemplateFrom(testCaseTemplates, link.dataset.template);
+  });
+});
+
+// close modal
+closeChecklist.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+
+        
+/* ================= PARTICLES ================= */
+const pWrap=document.getElementById('particles');
+if(pWrap){
+  for(let i=0;i<28;i++){
+    const s=document.createElement('span');
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=(Math.random()*12)+'s';
+    s.style.animationDuration=(10+Math.random()*10)+'s';
+    pWrap.appendChild(s);
+  }
+}
+
+/* ================= ZOOM ================= */
+const stage=document.getElementById('stage');
+const mindmap=document.getElementById('mindmap');
+let scale=1;
+
+if(mindmap && stage){
+  mindmap.addEventListener('wheel',e=>{
+    e.preventDefault();
+    scale+=e.deltaY*-0.001;
+    scale=Math.min(Math.max(.5,scale),2.2);
+    stage.style.transform=`scale(${scale})`;
+  });
+}
+
+/* ================= MIRO DRAW ENGINE ================= */
+
+const svg = document.querySelector('.mindmap-svg');
+
+function drawLine(x1,y1,x2,y2,delay){
+  const path=document.createElementNS("http://www.w3.org/2000/svg","path");
+  path.setAttribute("d",`M${x1} ${y1} L${x2} ${y2}`);
+  path.setAttribute("stroke","#4cc9f0");
+  path.setAttribute("stroke-width","3");
+  path.setAttribute("fill","none");
+  path.style.strokeDasharray=1000;
+  path.style.strokeDashoffset=1000;
+  path.style.transition="stroke-dashoffset 1.4s ease";
+
+  svg.appendChild(path);
+
+  setTimeout(()=>{
+    path.style.strokeDashoffset=0;
+  },delay);
+}
+
+function showNode(id,delay){
+  setTimeout(()=>{
+    document.getElementById(id)?.classList.add('show');
+  },delay);
+}
+
+
+
+document.getElementById("copyTemplateBtn")?.addEventListener("click", () => {
+
+  const textarea = document.getElementById("templateTextarea");
+  let content = textarea.value;
+
+  // ===== BUG =====
+  const bugMetaFields = document.getElementById("bugMetaFields");
+  if (bugMetaFields.style.display !== "none") {
+    const priority = document.getElementById("prioritySelect").value;
+    const severity = document.getElementById("severitySelect").value;
+
+    content = content.replace(/Priority:.*/g, priority);
+    content = content.replace(/Severity:.*/g, severity);
+  }
+
+  // ===== TC BASIC =====
+  const tcBasic = document.getElementById("tcPriorityBasic");
+  if (tcBasic.style.display !== "none") {
+    content = content.replace(/Priority:.*/g, tcBasic.value);
+  }
+
+  // ===== TESTIT =====
+  const tcTestITPriority = document.getElementById("tcPriorityTestIT");
+  if (tcTestITPriority.style.display !== "none") {
+    content = content.replace(/Приоритет:.*/g, tcTestITPriority.value);
+    content = content.replace(/Статус.*:/g, tcStatusTestIT.value);
+    content = content.replace(/Тест план.*:/g, tcPlanTestIT.value);
+  }
+
+  // ===== ZEPHYR =====
+  const tcZephyrPriority = document.getElementById("tcPriorityZephyr");
+  if (tcZephyrPriority.style.display !== "none") {
+    content = content.replace(/Приоритет:.*/g, tcZephyrPriority.value);
+    content = content.replace(/Выполнение.*/g, tcExecZephyr.value);
+  }
+
+  navigator.clipboard.writeText(content);
+
+  const btn = document.getElementById("copyTemplateBtn");
+  const old = btn.textContent;
+  btn.textContent = "✅ Copied";
+  setTimeout(() => (btn.textContent = old), 1200);
+});
+function connectServer() {
+    const command = 'ssh -t test@94.198.134.161 "monitor"';
+    const isWindows = navigator.userAgent.toLowerCase().includes("windows");
+
+    if (isWindows) {
+        // пытаемся открыть ssh://
+        window.location.href = "ssh://test@94.198.134.161";
+
+        // если через 1.5 сек ничего не произошло — показываем модалку
+        setTimeout(() => {
+            document.getElementById("gitModal").style.display = "flex";
+        }, 1500);
+
+    } else {
+        // Mac / Linux
+        navigator.clipboard.writeText(command);
+        alert("Команда скопирована. Вставьте её в терминал.");
+    }
+}
+
+function copyCommand() {
+    const command = 'ssh test@94.198.134.161 "monitor"';
+    navigator.clipboard.writeText(command);
+    alert("Команда скопирована. Вставьте её в Git Bash.");
+}
+
+function closeGitModal() {
+    document.getElementById("gitModal").style.display = "none";
+}
+
+
+
+    </script>
+
+<div id="gitModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:3000; align-items:center; justify-content:center;">
+  <div style="background:white; padding:30px; border-radius:12px; max-width:400px; text-align:center;">
+    <p>Для подключения нужено установить Git Bash.</p>
+    
+    <a href="https://git-scm.com/install/windows" target="_blank"
+       style="display:inline-block; margin:10px 0; padding:10px 20px; background:#4361ee; color:white; text-decoration:none; border-radius:6px;">
+       Скачать Git for Windows
+    </a>
+
+    <br><br>
+
+    <button onclick="copyCommand()" 
+      style="padding:8px 16px; cursor:pointer;">
+      📋 Скопировать команду
+    </button>
+
+    <br><br>
+
+    <button onclick="closeGitModal()" style="background:none; border:none; cursor:pointer;">
+      Закрыть
+    </button>
+  </div>
+</div>
+
+</body>
+</html>
+
