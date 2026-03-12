@@ -740,38 +740,44 @@
     loadingDiv.textContent = "Генерация ответа...";
     chatMessages.appendChild(loadingDiv);
 
-    try {
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-        "Authorization": "Bearer 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",
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        model: "qwen/qwen2.5-coder:7b-instruct",
-        messages: [
-            {
-                role: "system",
-                content: "You are Alexander's QA assistant. Help with software testing, bug reports, test cases, and QA questions."
-            },
-            {
-                role: "user",
-                content: message
-            }
-        ]
-    })
-});
+try {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer YOUR_API_KEY",
+            "Content-Type": "application/json",
+            "HTTP-Referer": window.location.href,
+            "X-Title": "QA Assistant"
+        },
+        body: JSON.stringify({
+            model: "qwen/qwen2.5-coder:7b-instruct",
+            messages: [
+                {
+                    role: "system",
+                    content: "You are Alexander's QA assistant. Help with software testing, bug reports, test cases, and QA questions."
+                },
+                {
+                    role: "user",
+                    content: message
+                }
+            ]
+        })
+    });
 
-const data = await response.json();
+    const data = await response.json();
 
-loadingDiv.remove();
+    loadingDiv.remove();
 
-addMessage(data.choices[0].message.content);
-
-    } catch (error) {
-        loadingDiv.textContent = "Ошибка подключения к модели";
-        console.error(error);
+    if (!response.ok) {
+        addMessage("Ошибка: " + JSON.stringify(data));
+        return;
     }
+
+    addMessage(data.choices[0].message.content);
+
+} catch (error) {
+    loadingDiv.textContent = "Ошибка подключения к модели";
+    console.error(error);
 }
 
         sendButton.addEventListener('click', sendMessage);
