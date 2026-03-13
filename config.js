@@ -1,0 +1,3 @@
+const CONFIG = {
+    OPENROUTER_API_KEY: "sk-or-v1-XXXXXXXXXXXXX"
+};
