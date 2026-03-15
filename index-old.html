@@ -441,7 +441,7 @@
 <body>
     <div class="container">
         <header>
-            <img src="./pic/photo.png" alt="Фото" class="profile-img">
+            <img src="./photo.png" alt="Фото" class="profile-img">
             <h1 class="name">Александр Кошевой</h1>
             <p class="position">QA Manual | Тестировщик ПО</p>
             <div class="contact-info">
@@ -535,62 +535,53 @@
             <h2 class="section-title">Инструменты</h2>
             <div class="skills-grid">
                 <div class="skill-card">
-  <img src="./pic/selenium.png" 
+  <img src="https://cdn.simpleicons.org/selenium/43B02A" 
      alt="Selenium" 
      style="width:40px;height:40px;">
   <p>Selenium</p>
 </div>
                 <div class="skill-card">
-  <img src="./pic/postman.png" 
+  <img src="https://cdn.simpleicons.org/postman/FF6C37" 
      alt="Postman" 
      style="width:40px;height:40px;">
   <p>Postman</p>
 </div>
-<div class="skill-card">
-  <img src="./pic/mysql.png" 
-       alt="MySQL" 
-       style="height:40px;">
-  <p>MySQL</p>
+                <div class="skill-card">
+                    <i class="fas fa-database" style="font-size: 2rem; color: var(--success);"></i>
+                    <p>MySQL</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-jira" style="font-size: 2rem; color: var(--secondary);"></i>
+                    <p>Jira</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code" style="font-size: 2rem; color: var(--danger);"></i>
+                    <p>Python</p>
+                </div>
+                <div class="skill-card">
+    <img src="https://cdn.simpleicons.org/charles/4285F4" alt="Charles" style="height:32px;">
+    <p>Charles</p>
 </div>
 
 <div class="skill-card">
-  <img src="./pic/jira.png" 
-       alt="Jira" 
-       style="height:40px;">
-  <p>Jira</p>
-</div>
-
-<div class="skill-card">
-  <img src="./pic/python.png" 
-       alt="Python" 
-       style="height:40px;">
-  <p>Python</p>
-</div>
-
-<div class="skill-card">
-  <img src="./pic/charles.png" alt="Charles" style="height:40px;">
-  <p>Charles</p>
-</div>
-
-<div class="skill-card">
-    <img src="./pic/kafka.png" alt="Kafka UI" style="height:40px;">
+    <img src="https://cdn.simpleicons.org/apachekafka/231F20" alt="Kafka UI" style="height:32px;">
     <p>Kafka UI</p>
 </div>
 
             <div class="skill-card">
-                <img src="./pic/cypress.png" alt="Cypress" style="height:40px;">
+                <img src="https://cdn.simpleicons.org/cypress/17202C" alt="Cypress" style="height:32px;">
                 <p>Cypress</p>
             </div>
 
             <div class="skill-card">
-                 <img src="./pic/kibana.png" alt="Kibana" style="height:40px;">
+                 <img src="https://cdn.simpleicons.org/kibana/005571" alt="Kibana" style="height:32px;">
                  <p>Kibana</p>
             </div>
 
             <div class="skill-card">
-                <img src="./pic/miro.png" 
+                <img src="https://cdn.simpleicons.org/miro/FFD02F" 
                 alt="Miro" 
-                style="height:40px;">
+                style="height:32px;">
                 <p>Miro</p>
             </div>
             </div>
@@ -711,6 +702,8 @@
     </div>
 </div>
 
+    <script src="config.js"></script>
+
     <script>
         // Chat functionality
         const chatToggle = document.getElementById('chatToggle');
@@ -753,7 +746,7 @@ try {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
-            "Authorization": "Bearer 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",
+            "Authorization": "Authorization": "Bearer " + CONFIG.OPENROUTER_API_KEY,
             "Content-Type": "application/json",
             "HTTP-Referer": window.location.href,
             "X-Title": "QA Assistant"
